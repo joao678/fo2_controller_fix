@@ -19,3 +19,5 @@ This project aims to address some of the issues found while using a controller i
 6. Go to the controller settings in the game and select the "1 xidi...." controller
 7. Change your controls
 8. Play
+
+Change both numbers in "Range" in case it's misaligned or too sensitive
