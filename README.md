@@ -11,7 +11,7 @@ This project aims to address some of the issues found while using a controller i
 - uses [Frida](https://frida.re/) (server) and [frida-js](https://github.com/httptoolkit/frida-js) to intercept game functions
 - uses [MemoryJS](https://github.com/Rob--/memoryjs/) to manipulate the game's memory
 # Installing
-1. Grab the latest release
+1. Grab the latest [release](https://github.com/joao678/fo2_controller_fix/releases/download/latest/fo2_controller_fix.zip)
 2. Place all files from the zip in the game's folder
 3. Connect the controller (if you're on Steam, make sure the controller profile is either blank or default xbox controller template or just disable it entirely, otherwise you'll get conflicting bindings)
 4. Run FlatOut 2
