@@ -1,0 +1,1 @@
+gcc -c -o main.o main.c && gcc -shared -o shared_memory_example.dll main.o -lkernel32

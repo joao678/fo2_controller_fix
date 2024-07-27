@@ -1,0 +1,1 @@
+{ "dependencies": { "@types/bun": "^1.1.1", "frida-js": "^0.3.0", "iupjs": "git+https://github.com/joao678/iup-js.git", "memoryjs": "^3.5.1" } }
