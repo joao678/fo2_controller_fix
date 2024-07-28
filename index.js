@@ -3,7 +3,7 @@ import frida_script from "./frida_script.js" with { type: "text" };
 
 import { execFile } from 'child_process';
 import { connect } from 'frida-js';
-import { button, dialog, iup, text } from "iupjs";
+import { button, dialog, item, iup, IUP_IGNORE, IUP_MOUSEPOS, IupLoadImage, IupPopup, IupSetHandle, menu, str, text } from "iupjs";
 import { resolve } from 'path';
 import { feedXidiDataFlatOut2 } from './fo2_controller_fix.js';
 
@@ -25,6 +25,7 @@ setTimeout(async () => {
 }, 2000);
 
 iup.open();
+iup.imgLibOpen();
 
 await iup.loadLedFromFile(dialog_led);
 const win = dialog.fromHandleName('dlg_led');
@@ -49,10 +50,29 @@ applyButton.action = function () {
     maxRangeValue = maxRangeControl.value;
 }
 
-win.show();
+iup.map(win);
+
+IupSetHandle(str`trayICN`, IupLoadImage(str`icon.png`));
+
+win.tray = 'YES';
+win.trayimage = 'trayICN';
+win.traytip = 'FO2 Controller fix running...';
+win.hidetaskbar = 'YES';
+
+const trayMenu = new menu((() => {
+    const i = new item('Exit');
+    i.action = () => process.exit();
+    return i;
+})());
+
+win.trayclick_cb = function (ih, but, pressed, dclick) {
+    if (dclick && but === 1) win.visible == 'NO' ? win.visible = 'YES' : win.visible = 'NO';
+    if (but === 3) IupPopup(trayMenu.handle, IUP_MOUSEPOS, IUP_MOUSEPOS);
+}
 
 win.close_cb = function () {
-    process.exit();
+    win.visible = 'NO';
+    return IUP_IGNORE;
 }
 
 setInterval(async () => {
