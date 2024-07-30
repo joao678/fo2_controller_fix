@@ -1,11 +1,13 @@
 import dialog_led from "./dialog.led" with { type: "file" };
 import frida_script from "./frida_script.js" with { type: "text" };
+import tray_icon from "./icon.png" with { type: "file" };
 
 import { execFile } from 'child_process';
 import { connect } from 'frida-js';
 import { button, dialog, item, iup, IUP_IGNORE, IUP_MOUSEPOS, IupLoadImage, IupPopup, IupSetHandle, menu, str, text } from "iupjs";
 import { resolve } from 'path';
 import { feedXidiDataFlatOut2 } from './fo2_controller_fix.js';
+import { $ } from "bun";
 
 execFile(resolve('frida-server.exe'), { windowsHide: true });
 let isBindingKey = false;
@@ -52,7 +54,7 @@ applyButton.action = function () {
 
 iup.map(win);
 
-IupSetHandle(str`trayICN`, IupLoadImage(str`icon.png`));
+IupSetHandle(str`trayICN`, IupLoadImage(str`${tray_icon}`));
 
 win.tray = 'YES';
 win.trayimage = 'trayICN';
@@ -74,6 +76,11 @@ win.close_cb = function () {
     win.visible = 'NO';
     return IUP_IGNORE;
 }
+
+setInterval(async () => {
+    const isRunning = (await $`tasklist /fi "IMAGENAME eq flatout2.exe" /fo csv`.text()).toLowerCase().indexOf('flatout2.exe') != -1;
+    if (!isRunning) process.exit();
+}, 1000);
 
 setInterval(async () => {
     feedXidiDataFlatOut2(minRangeValue, maxRangeValue, isBindingKey);
