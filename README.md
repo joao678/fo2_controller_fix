@@ -15,9 +15,8 @@ This project aims to address some of the issues found while using a controller i
 2. Place all files from the zip in the game's folder
 3. Connect the controller (if you're on Steam, make sure the controller profile is either blank or default xbox controller template or just disable it entirely, otherwise you'll get conflicting bindings)
 4. Run FlatOut 2
-5. Run fo2_controller_fix.exe
-6. Go to the controller settings in the game and select the "1 xidi...." controller
-7. Change your controls
-8. Play
+5. Go to the controller settings in the game and select the "1 xidi...." controller
+6. Change your controls
+7. Play
 
-Change both numbers in "Range" in case it's misaligned or too sensitive
+A configuration window is open in the system tray, double click on it to change both numbers in "Range" in case the steering is misaligned or too sensitive
